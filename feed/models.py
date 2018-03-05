@@ -12,6 +12,3 @@ class Feed(models.Model):
 	def __str__(self):
 		return self.user
 
-	class Meta:
-		ordering = ["time"]
-	

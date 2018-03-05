@@ -1,0 +1,10 @@
+{% extends "feed/basic.html" %}
+
+{% block content1 %}
+{% endblock %}
+
+{% block content %}
+	{% for post in object_list %}
+		<h5>{{post.time}}<a href="/article/{{post.name}}">{{post.name}}</a></h5>
+	{% endfor %}
+{% endblock %}

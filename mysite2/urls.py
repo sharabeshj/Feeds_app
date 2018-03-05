@@ -19,5 +19,6 @@ from django.conf.urls import re_path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^',include('feed.urls'))
+    re_path(r'^',include('feed.urls')),
+    re_path(r'^article',include('article.urls'))
 ]

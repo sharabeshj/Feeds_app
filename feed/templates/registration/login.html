@@ -1,10 +1,15 @@
 {% extends "feed/basic.html" %}
 
+{% block content1%}
+	<div class="offset8">
+		<center>
+			<a href="/register" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Register</a>
+		</center>
+	</div>
+{% endblock %}
+
 {% block content %}
 	<form method="post" class="form-signin" action="{% url 'login' %}">
-		{% if form.errors %}
-			<p>Invalid Credentials</p>
-		{% endif %}
 		{% csrf_token %}
 		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 		<h2>Username: <input type="text" name="username"></h2>

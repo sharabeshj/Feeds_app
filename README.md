@@ -1,4 +1,4 @@
-This is an feeds app having detais of users as they logon and compose articles
+This is an feeds app having detaias of users as they logon and compose articles
 
 
 **Still under development **

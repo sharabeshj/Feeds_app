@@ -1,0 +1,10 @@
+{% extends "feed/basic.html" %}
+
+{% block content1 %}
+{% endblock %}
+
+{% block content %}
+	<h3>{{article.name}}</h3>
+	<h6>on {{article.time}}</h6>
+	{{article.content|safe|linebreaks}}
+{% endblock %}

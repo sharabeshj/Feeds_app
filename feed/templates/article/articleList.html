@@ -5,6 +5,6 @@
 
 {% block content %}
 	{% for post in object_list %}
-		<h5>{{post.time}}<a href="/article/{{post.name}}">{{post.name}}</a></h5>
+		<h5>{{post.time}}<a href="{{ post.get_absolute_url }}">{{post.name}}</a></h5>
 	{% endfor %}
 {% endblock %}

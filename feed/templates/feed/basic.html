@@ -12,36 +12,40 @@
           <li class="nav-item active">
             <a class="nav-link" href="/">Feeds</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="/article">Articles</a>
-          </li>
-          <li class="nav-item">
-            {% if user.is_authenticated %}
-            <p>Logged in as {{user.username}}</p>
-            <a href="/logout" class="nav-item">Logout</a>
-          {% else %}
-            <p>You are not logged in</p>
-            <a href="/login" class="nav-item">Login</a>
-          {% endif %}
-          </li>
+          
         </ul>
       </nav>
+      <div class="container-fluid">
+        {% block content1 %}
+          <div class="row justify-content-end">
+            <div class="col-2">
+                <a href="/compose" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Post</a>
+            </div>
+            <div class="col-2">
+              {% if user.is_authenticated %}
+                <p>Logged in as {{user.username}}</p>
+                <a href="/logout" class="btn btn-primary btn-sm active">Logout</a>
+              {% else %}
+                <p>You are not logged in</p>
+                <a href="/login" class="btn btn-primary btn-sm active">Login</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endblock %}
+      </div>
       <div class="container">
-            {% block content1 %}
-              <div class="offset8">
-                <center>
-                  <a href="/post" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Post</a>
-                </center>
-              </div>
-            {% endblock %}
-            <center>
+        <div class="row justify-content-center">
+          <div class="col-6">
               {% block content %}
                 {% for user in userData %}              
                   <p><b>{{user.user}}</b> {{user.time}}</p>
                   {{user.content}}
                 {% endfor %}
               {% endblock %}
-            </center>
+          </div>
+        </div> 
       </div>
 </body>
 </html>

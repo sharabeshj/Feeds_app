@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-	<form method="post" action="{% url 'post' %}">
+	<form method="post" action="{% url 'compose' %}">
 		{% csrf_token %}
 		{% if form.errors %}
 			<p>There's some error</p>
@@ -12,6 +12,6 @@
 
 		{{form.as_p}}
 
-		<button class= "btn btn-lg btn-primary" type="submit" value="post">post</button>
+		<button class= "btn btn-lg btn-primary" type="submit" value="submit">post</button>
 	</form>
 {% endblock %}

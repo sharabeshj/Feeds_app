@@ -8,11 +8,10 @@ from .post import Post
 # Create your views here
 
 def index(request):
-	return render(request,'feed/basic.html',{'title':'Feeds','userData': Feed.objects.all()})
+	return render(request,'feed/basic.html',{'title':'Feeds','userData': Feed.objects.all().order_by('-time')})
 
 def login(request):
 	if request.method == "POST":
-		print("hi")
 		username = request.POST['username']
 		password = request.POST['password']
 		user = authenticate(username=username,password=password)
@@ -28,7 +27,6 @@ def login(request):
 		else:
 			return redirect('/register')
 	else:
-		print("hi")
 		return render(request,'registration/login.html',{'title':'Login'})
 
 
@@ -43,6 +41,10 @@ def register(request):
 			password = form.cleaned_data['password1']
 			user = authenticate(username = username, password = password)
 			auth_login(request,user)
+			now = datetime.datetime.now()
+			text = "%s has joined the network" %username
+			p = Feed(user=username,time=now,content =text)
+			p.save()
 			return redirect('/')
 	else:
 		form = UserCreationForm()
@@ -51,24 +53,26 @@ def register(request):
 	return render(request,'registration/register.html',context)
 
  
-def post(request):
-	if request.method == "POST":
-		form = Post(request.POST)
-		if form.is_valid():
-			form.save()
-			name = form.cleaned_data['name']
-			content = form.cleaned_data['article']
-			time = datetime.datetime.now()
-			username = request.user.id
-			text = "%s has posted an article on %s" (username,name)
-			p = Feed(user=username,time=time,content =text)
-			p.save()
-			a = Article(name = name, time = time, content = content)
-			a.save()
-			return redirect('/')
+def compose(request):
+	if request.user.is_authenticated:
+		if request.method == "POST":
+			form = Post(request.POST)
+			if form.is_valid():
+				name = form.cleaned_data['name']
+				content = form.cleaned_data['article']
+				time = datetime.datetime.now()
+				username = request.user
+				text = "%s has posted an article on %s" %(username,name)
+				p = Feed(user=username,time=time,content =text)
+				p.save()
+				a = Article(name = name, time = time, content = content)
+				a.save()
+				return redirect('/')
+
+		else:
+			form = Post()
+			return render (request,'article/post.html',{'form':form,'title':'Post'})
 
 	else:
-		form = Post()
-
-	return redirect(request,'article/post.html',{'form':form,'title':'Post'})
+		return redirect('/login')
 

@@ -39,10 +39,6 @@
         <div class="row justify-content-center">
           <div class="col-6">
               {% block content %}
-                {% for user in userData %}              
-                  <p><b>{{user.user}}</b> {{user.time}}</p>
-                  {{user.content}}
-                {% endfor %}
               {% endblock %}
           </div>
         </div> 

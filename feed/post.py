@@ -3,10 +3,13 @@
 
 
 from django import forms
+from django.forms import ModelForm
+from article.models import Form
 
-class Post(forms.Form):
-    name = forms.CharField(label='Article name', max_length=50)
-    article = forms.CharField(label = 'Your article',max_length=400)
+class Post(ModelForm):
+    class Meta:
+    	model = Form
+    	fields = ['name','article']
 
 	
 			

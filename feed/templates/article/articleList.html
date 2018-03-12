@@ -4,7 +4,10 @@
 {% endblock %}
 
 {% block content %}
-	{% for post in object_list %}
-		<h5>{{post.time}}<a href="{{ post.get_absolute_url }}">{{post.name}}</a></h5>
-	{% endfor %}
+	<div class="list-group mt-3">
+        <a href="/" class="list-group-item list-group-item-action list-group-item-dark"><h3>Articles</h3></a>
+            {% for u in object_list %}              
+                <a href="{{ u.get_absolute_url }}" class="list-group-item list-group-item-action"><p><b>{{u.name}}</b> {{u.time}}</p></a>
+            {% endfor %}
+    </div>
 {% endblock %}

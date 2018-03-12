@@ -5,9 +5,8 @@ from django.db import models
 class Feed(models.Model):
 	user = models.CharField(max_length=50)
 	time = models.DateTimeField()
+	method = models.CharField(max_length = 50,null = True, blank = True)
 	content = models.TextField()
-	like = models.IntegerField(null=True,blank=True)
-	comment = models.TextField(null=True,blank=True)
 
 	def __str__(self):
 		return self.user

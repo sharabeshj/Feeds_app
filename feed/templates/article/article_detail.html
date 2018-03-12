@@ -4,7 +4,54 @@
 {% endblock %}
 
 {% block content %}
-	<h3>{{article.name}}</h3>
-	<h6>on {{article.time}}</h6>
-	{{article.content|safe|linebreaks}}
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	var csrftoken = $.cookie('csrftoken');
+	function csrfSafeMethod(method){
+		return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+	}
+	$.ajaxSetup({
+		beforeSend : function (xhr,settings) {
+			if(!csrfSafeMethod(settings.type)&&!this.crossDomain){
+				xhr.setRequestHeader("X-CSRFToken",csrftoken);
+			}
+		}
+	});
+	$(document).ready(function(){
+			{% if user in article.get_likers %}
+				$('a.like').data('action') = 'unlike'
+				$('a.like').text('Unlike')
+			{% else %}
+				$('a.like').data('action') = 'like'
+				$('a.like').text('Like')
+			{% endif %}	
+		$('a.like').click(function(e){
+			e.preventDefault();
+			$.post('{% url 'article-like' %}',{
+				id : $(this).data('id')
+				action : $(this).data('action')
+			},
+			function(data){
+				if(data['status'] == 'ok'){
+					var previous_action = $('a.like').data('action');
+					$('a.like').data('action',previous_action == 'like' ? 'Unlike':'like');
+					$('a.like').text(previous_action == 'like'? 'unlike' : 'like');
+
+					var previous_likes = likes;
+					$('span.count .total').text(previous_action == 'like'? previous_likes+1:previous_likes-1)
+
+				}
+			});
+		});
+	});
+	</script>
+	<div class="mt-3">
+		<h3>{{article.name}}</h3>
+		<h6>on {{article.time}}</h6>
+		{{article.content|safe|linebreaks}}
+       <span class="count">
+           <span class="total">{{ article.like }}</span> like
+       </span>
+        <a href="#" data-id="{{ article.name }}" data-action="like" class="like">Like</a>
+	</div>
 {% endblock %}

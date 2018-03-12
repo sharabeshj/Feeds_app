@@ -7,4 +7,5 @@ urlpatterns=[
 	url(r'^login$',views.login, name = 'login'),
 	url(r'^logout$',logout,name= 'logout'),
 	url(r'^register$',views.register, name = 'register'),
-	url(r'^compose$',views.compose,name = 'compose')]
+	url(r'^compose$',views.compose,name = 'compose'),
+	url(r'^ajax/articleLike$',views.articleLike,name = 'article-like')]

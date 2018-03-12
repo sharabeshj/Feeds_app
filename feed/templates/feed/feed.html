@@ -1,0 +1,10 @@
+{% extends "feed/basic.html" %}
+
+{% block content %}
+	<div class="list-group">
+        <a href="/" class="list-group-item list-group-item-action list-group-item-dark"><h3>Feeds</h3></a>
+            {% for u in userData %}              
+                <a href="{% if u.method == 'login' %}/{% else %}/article{% endif %}" class="list-group-item list-group-item-action"><p><b>{{u.user}}</b> {{u.time}}{{u.content}}</p></a>
+            {% endfor %}
+    </div>
+{% endblock %} 

@@ -44,8 +44,21 @@ class Article(models.Model):
 	def get_absolute_url(self):
 		return reverse('article-detail',args = [self.name])
 
+	def get_likes(self):
+		likes = Activity.objects.all().filter(activity_type = 'L',article = self.name)
+		return likes
+
+	def calculate_likes(self):
+		likes = self.get_likes()
+		self.likes = likes.count()
+		self.save()
+		return self.likes
+
 	def get_likers(self):
-		likers = Activity.objects.all().filter(activity_type = 'L',article = self.name)
+		likes = self.get_likes()
+		likers = []
+		for like in likes:
+			likers.append(like.user)
 		return likers
 
 

@@ -1,13 +1,15 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login as auth_login,authenticate
 from .models import Feed
-from article.models import Article,Profile
+from article.models import Article,Profile,Activity
 from django.contrib.auth.forms import UserCreationForm
 import datetime
 from django.contrib.auth.models import User
 from .post import Post
 import jsonpickle
 import json
+from django.http import JsonResponse,HttpResponse
+from django.views.decorators.csrf import csrf_protect
 
 # Create your views here
 
@@ -84,23 +86,16 @@ def compose(request):
 	else:
 		return redirect('/login')
 
-
+@csrf_protect
 def articleLike(request):
-	article_id = request.POST.get('name')
-	action = require.POST.get('action')
-	if article_id and action:
-		try: 
-			if action == 'like':
-				user = User.objects.get(id = request.user.id)
-				article = Article.objects.get(name = article_id)
-				like = Activity(user = request.user, activity_type = LIKE, article = article.name,time = datetime.datetime.now())
-				like.save()
+	article_id = request.POST.get('id')
+	article = Article.objects.get(name = article_id)
+	like = Activity.objects.filter(user = request.user, activity_type = Activity.LIKE, article = article.name) 
+	if like:
+		like.delete()
 				
-			else:
-				user = User.objects.get(id = request.user.id)
-				article = Article.objects.get(name = article_id)
-				Activity.objects.filter(article = article.name, user = request.user, activity_type = LIKE).delete()
-			return JsonResponse({'status':'ok'})
-		except:
-			pass
-		return JsonResponse({'status':'ok'})
+	else:
+		like = Activity(user = request.user, activity_type = Activity.LIKE, article = article.name,time = datetime.datetime.now())
+		like.save()
+	return JsonResponse({'status':'ok'})
+	

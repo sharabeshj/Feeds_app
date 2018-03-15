@@ -9,9 +9,9 @@ User models--taken care of
 6/3/2018 - able to add articles and show the same in feeds--still have to make provision for like and comments
 
 toDo:
-	1.Have to make like and comment facility
+	1.Have to make like and comment facility**added like facility ** 
 	2.Store more than just articles ... like adding pictures
 	3.Making it fully functional dynamic page able to fetch data automatically
-	4.make a chat app and link it to this app and able to send meoulssage to those logged in
+	4.make a chat app and link it to this app and able to send message to those logged in
 
 Hope i could make  this :)

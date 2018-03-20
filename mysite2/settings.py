@@ -31,10 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-<<<<<<< HEAD
     'channels',
-=======
->>>>>>> cf62b7241b864dc3801f66794b327c5c4f3a1dc8
     'article',
     'feed',
     'django.contrib.admin',
@@ -125,7 +122,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-<<<<<<< HEAD
 
 ASGI_APPLICATION = 'mysite2.routing.application'
 
@@ -137,6 +133,3 @@ CHANNEL_LAYERS = {
     }
     }
 }
-
-=======
->>>>>>> cf62b7241b864dc3801f66794b327c5c4f3a1dc8

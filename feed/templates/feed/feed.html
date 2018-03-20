@@ -2,21 +2,15 @@
 
 {% block content %}
 	<div class="list-group">
-<<<<<<< HEAD
         <a href="/" id="list" class="list-group-item list-group-item-action list-group-item-dark"><h3>Feeds</h3></a>
-=======
-        <a href="/" class="list-group-item list-group-item-action list-group-item-dark"><h3>Feeds</h3></a>
->>>>>>> cf62b7241b864dc3801f66794b327c5c4f3a1dc8
             {% for u in userData %}              
                 <a href="{% if u.method == 'login' %}/{% else %}/article{% endif %}" class="list-group-item list-group-item-action"><p><b>{{u.user}}</b> {{u.time}}{{u.content}}</p></a>
             {% endfor %}
     </div>
-<<<<<<< HEAD
 {% endblock %} 
 {% block script %}
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
 			var socket = new WebSocket('ws://'+window.location.host+'/');
 			socket.onclose = function(){
 				console.log('connection rejected');
@@ -35,9 +29,5 @@
 					$("#list").append(article);
 				}
 			};
-		});
 	</script>
 {% endblock %}
-=======
-{% endblock %} 
->>>>>>> cf62b7241b864dc3801f66794b327c5c4f3a1dc8

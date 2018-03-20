@@ -1,0 +1,19 @@
+{% extends "feed/basic.html" %}
+
+{% block content1%}
+	<div class="row justify-content-end">
+            <div class="col-2">
+                <a href="/register" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Register</a>
+            </div>
+     </div>
+{% endblock %}
+
+{% block content %}
+	<form method="post" class="form-signin" action="{% url 'login' %}">
+		{% csrf_token %}
+		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+		<h2>Username: <input type="text" name="username"></h2>
+		<h2>Password: <input type="password" name="password"></h2>
+		<p><button class="btn btn-lg btn-primary" type="submit" value="login">Login</button></p>
+	</form>
+{% endblock %}

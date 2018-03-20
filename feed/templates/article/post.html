@@ -1,0 +1,32 @@
+{% extends "feed/basic.html" %}
+
+{% block content1 %}
+{% endblock %}
+
+{% block content %}
+	<form method="post" action="{% url 'compose' %}">
+		{% csrf_token %}
+		{% if form.errors %}
+			<p>There's some error</p>
+		{% endif %}
+
+		{{form.as_p}}
+
+		<button id="post" lass= "btn btn-lg btn-primary" type="submit" value="submit">post</button>
+	</form>
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var socket = new WebSocket('ws://'+window.location.host+'/');
+			$("#post").click(function(){
+				var message = $("#id_name").val();
+				socket.send(JSON.stringify({
+					'message' : message
+				}));
+			});
+		});
+	</script>
+{% endblock %}

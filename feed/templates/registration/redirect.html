@@ -1,0 +1,43 @@
+
+
+    <!DOCTYPE html>
+
+    <html lang="en">
+
+    <head>
+
+    <meta charset="utf-8">
+
+    <title>Redirecting</title>
+
+    <script type="text/javascript">
+        /*var socket = new WebSocket('ws://127.0.0.1:8000/');
+        socket.onclose = function(){
+            console.log('connection lost');
+        };
+        socket.send(JSON.stringify(
+            {
+                'user' : '{{user}}',
+                'activity_type' : 'login',
+                'message' : ''
+            }));*/
+        function pageRedirect() {
+
+            window.location.replace("/");
+
+        }      
+
+        setTimeout("pageRedirect()", 5000);
+
+    </script>
+
+    </head>
+
+    <body>
+
+        <p><strong>Note:</strong> You will be redirected to the main page in 5 sec. You are not able to get back to this page by clicking the browser back button.</p>
+
+    </body>
+
+    </html>
+

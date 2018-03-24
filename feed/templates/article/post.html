@@ -20,9 +20,15 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 			var socket = new WebSocket('ws://'+window.location.host+'/');
+			socket.onclose = function(){
+				console.log("hello");
+			};
 			$("#post").click(function(){
 				var message = $("#id_name").val();
+				console.log(message);
 				socket.send(JSON.stringify({
+					'user' : '{{user}}',
+					'activity_type' : 'post',
 					'message' : message
 				}));
 			});

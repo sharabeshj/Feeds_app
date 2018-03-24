@@ -17,7 +17,16 @@
 			};
 			socket.onmessage = function(e){
 				var data = JSON.parse(e.data);
-				var user = data['username'],status = data['is_logged_in'];
+				var user = data['user'],message = data['message'];
+				if(data['activity_type']=='login'){
+					var content = '<a class="list-group-item list-group-item-action"><p><b>'+user+'</b> has logged in</p></a>';
+					$("#list").append(content);
+				}
+				else{
+					var article = '<a class="list-group-item list-group-item-action"><p><b>'+user+'</b> has posted an article on '+message+'</p></a>';
+					$("#list").append(article);
+				}
+				/*var user = data['username'],status = data['is_logged_in'];
 				if(status==true){
 				var content = '<a class="list-group-item list-group-item-action"><p><b>'+user+'</b> has logged in</p></a>';
 				$("#list").append(content);
@@ -27,7 +36,7 @@
 				if(post == true){
 					var article = '<a class="list-group-item list-group-item-action"><p><b>'+username+'</b> has posted an article on '+message+'</p></a>';
 					$("#list").append(article);
-				}
+				}*/
 			};
 	</script>
 {% endblock %}

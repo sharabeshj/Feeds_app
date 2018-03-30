@@ -9,25 +9,26 @@
     <meta charset="utf-8">
 
     <title>Redirecting</title>
-
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
-        /*var socket = new WebSocket('ws://127.0.0.1:8000/');
-        socket.onclose = function(){
-            console.log('connection lost');
-        };
-        socket.send(JSON.stringify(
+       
+        $(document).ready(function(){
+        var socket = new WebSocket('ws://'+window.location.host+'/');
+        console.log(socket);
+            socket.send(JSON.stringify(
             {
-                'user' : '{{user}}',
+                'user' : '{{username}}',
                 'activity_type' : 'login',
-                'message' : ''
-            }));*/
+                'message' : ' '
+            }));
+        });
         function pageRedirect() {
 
             window.location.replace("/");
 
         }      
 
-        setTimeout("pageRedirect()", 5000);
+        setTimeout("pageRedirect()", 2000);
 
     </script>
 
@@ -35,7 +36,7 @@
 
     <body>
 
-        <p><strong>Note:</strong> You will be redirected to the main page in 5 sec. You are not able to get back to this page by clicking the browser back button.</p>
+        <p><strong>Note:</strong> You will be redirected to the main page in 2 sec. You are not able to get back to this page by clicking the browser back button.</p>
 
     </body>
 

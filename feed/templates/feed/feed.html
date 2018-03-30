@@ -18,6 +18,7 @@
 			socket.onmessage = function(e){
 				var data = JSON.parse(e.data);
 				var user = data['user'],message = data['message'];
+				console.log(data['activity_type']);
 				if(data['activity_type']=='login'){
 					var content = '<a class="list-group-item list-group-item-action"><p><b>'+user+'</b> has logged in</p></a>';
 					$("#list").append(content);
@@ -26,17 +27,7 @@
 					var article = '<a class="list-group-item list-group-item-action"><p><b>'+user+'</b> has posted an article on '+message+'</p></a>';
 					$("#list").append(article);
 				}
-				/*var user = data['username'],status = data['is_logged_in'];
-				if(status==true){
-				var content = '<a class="list-group-item list-group-item-action"><p><b>'+user+'</b> has logged in</p></a>';
-				$("#list").append(content);
-						}
-				var username = data['user'],message = data['message'],post = data['has_posted'];
-				console.log(post);
-				if(post == true){
-					var article = '<a class="list-group-item list-group-item-action"><p><b>'+username+'</b> has posted an article on '+message+'</p></a>';
-					$("#list").append(article);
-				}*/
+				
 			};
 	</script>
 {% endblock %}

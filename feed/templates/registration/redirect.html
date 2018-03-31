@@ -11,8 +11,7 @@
     <title>Redirecting</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
-        function pageRedirect() {
-            var socket = new WebSocket('ws://'+window.location.host+'/');
+        var socket = new WebSocket('ws://'+window.location.host+'/');
             socket.onopen = function(){
             console.log("hello");
             };
@@ -26,6 +25,8 @@
                     'message' : ''
                 }));
             });
+        function pageRedirect() {
+            
             window.location.replace("/");
 
         }      

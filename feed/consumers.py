@@ -3,8 +3,12 @@ import json
 
 class FeedConsumer(AsyncWebsocketConsumer):
 	async def connect(self):
-		await self.channel_layer.group_add("users",self.channel_name)
-		await self.accept()
+		self.user = self.scope["user"]
+		if self.user.is_active:
+			await self.channel_layer.group_add("users",self.channel_name)
+			await self.accept()
+		else:
+			await self.close()	
 
 	async def disconnect(self,close_code):
 		await self.channel_layer.group_discard("users",self.channel_name)

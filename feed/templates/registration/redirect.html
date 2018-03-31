@@ -14,17 +14,16 @@
         var socket = new WebSocket('ws://'+window.location.host+'/');
             socket.onopen = function(){
             console.log("hello");
-            };
-            socket.onclose = function(){
-                console.log("closed");
-            };
-            $("button").click(function(){
-                socket.send(JSON.stringify({
+            socket.send(JSON.stringify({
                     'user' : '{{user}}',
                     'activity_type' : 'login',
                     'message' : ''
                 }));
-            });
+            };
+            socket.onclose = function(){
+                console.log("closed");
+            };
+            
         function pageRedirect() {
             
             window.location.replace("/");

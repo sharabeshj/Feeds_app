@@ -23,6 +23,7 @@
 			socket.onclose = function(){
 				console.log("hello");
 			};
+
 			$("#post").click(function(){
 				var message = $("#id_name").val();
 				console.log(message);
@@ -31,6 +32,7 @@
 					'activity_type' : 'post',
 					'message' : message
 				}));
+				console.log(socket);
 			});
 	</script>
 {% endblock %}

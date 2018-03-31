@@ -11,24 +11,26 @@
     <title>Redirecting</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
-       
-        $(document).ready(function(){
-        var socket = new WebSocket('ws://'+window.location.host+'/');
-        console.log(socket);
-            socket.send(JSON.stringify(
-            {
-                'user' : '{{username}}',
-                'activity_type' : 'login',
-                'message' : ' '
-            }));
-        });
         function pageRedirect() {
-
+            var socket = new WebSocket('ws://'+window.location.host+'/');
+            socket.onopen = function(){
+            console.log("hello");
+            };
+            socket.onclose = function(){
+                console.log("closed");
+            };
+            $("button").click(function(){
+                socket.send(JSON.stringify({
+                    'user' : '{{user}}',
+                    'activity_type' : 'login',
+                    'message' : ''
+                }));
+            });
             window.location.replace("/");
 
         }      
 
-        setTimeout("pageRedirect()", 2000);
+        setTimeout("pageRedirect()", 5000);
 
     </script>
 
@@ -37,6 +39,7 @@
     <body>
 
         <p><strong>Note:</strong> You will be redirected to the main page in 2 sec. You are not able to get back to this page by clicking the browser back button.</p>
+        <button>click me</button>
 
     </body>
 

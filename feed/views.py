@@ -29,11 +29,14 @@ def login(request):
 				text = "%s has joined the network" %username
 				p = Feed(user=username,time=now,method = method, content =text)
 				p.save()
-				return render(request,'registration/redirect.html',{'username':username})
+				return redirect('/redirect')
 		else:
 			return redirect('/register')
 	else:
 		return render(request,'registration/login.html',{'title':'Login'})
+
+def redirect1(request):
+	return render(request,'registration/redirect.html')
 
 
 def register(request):
